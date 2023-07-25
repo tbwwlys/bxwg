@@ -1,0 +1,24 @@
+<!--components/goods-list/index.wxml-->
+<scroll-view class="menu-list" scroll-into-view="section-{{ current }}" scroll-y bindscroll="onScroll" show-scrollbar="{{ false }}" enhanced>
+  <slot name="before"></slot>
+  <view class="list">
+    <view class="section" wx:for="{{ list }}" wx:for-item="goodsCategory" wx:key="index" data-index="{{ index }}" id="section-{{ index }}">
+      <view class="section-header">  
+        {{ goodsCategory.label }}
+      </view>
+      <view class="section-list">
+        <view class="item" wx:for="{{ goodsCategory.goodsList }}" wx:key="index" wx:for-item="goods">
+          <image src="{{ goods.cover }}"/>
+          <view class="info">
+            <view class="name">{{ goods.name}}</view>
+            <view class="description">{{ goods.description }}</view>
+            <view class="price">￥{{ goods.price }}</view>
+          </view>
+          <view class="add-icon" bindtap="selectedGoods" data-goods="{{ goods }}">
+            <image src="../../assets/icon/plus.svg"/>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

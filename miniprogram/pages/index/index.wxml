@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="page">
+  <!-- 轮播图区域 -->
+  <force-swiper
+    list="{{ swiperList }}"
+    style="width: 100vw; height: 630rpx;"
+    dots-style="left: 50rpx;bottom: 58rpx;"
+    round ></force-swiper>
+  <!-- 积分和会员显示区域 -->
+  <view class="member-area">
+    <view class="vip-box">
+      <image src="../../assets/image/vip-pic.png" mode=""/>
+      <view class="meta">
+        <view class="title">{{ user.isLogin ? '微雪花会员' : '尊敬的用户'}}</view>
+        <progress-bar wx:if="{{ user.isLogin }}" value="{{ 33 }}" width="320rpx"></progress-bar>
+        <view class="tips">{{ user.isLogin ? '再升一级可享【升级礼包】等6项权益' : '会员可享【限时优惠】等多项权益'}}</view>
+      </view>
+    </view>
+
+    <view class="coin-box" wx:if="{{ user.isLogin }}">
+      <image src="../../assets/image/coin.png" mode="aspectFill"/>
+      <view class="currency">51</view>
+    </view>
+
+    <view wx:if="{{ !user.isLogin }}" class="login-btn" bindtap="gotoLogin">授权登录</view>
+  </view>
+  <!-- 点餐banner -->
+  <view class="menu-banner">
+    <view class="location">
+      <image src="../../assets/icon/location.svg"/>
+      <view class="name">{{ nearbyStore ? nearbyStore.name : '附近暂无门店' }}</view>
+    </view>
+    <image class="menu-card" src="../../assets/image/menu-banner.jpg" bindtap="onMenuCardClick"/>
+  </view>
+  <view class="banner-list">
+    <image class="banner" src="../../assets/image/banner-1.jpg" bindtap="onArticleClick"/>
+    <image class="banner" src="../../assets/image/banner-2.jpg" bindtap="onArticleClick"/>
+    <image class="banner" src="../../assets/image/banner-3.jpg" bindtap="onArticleClick"/>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+<scroll-view class="sidebar" scroll-y show-scrollbar="{{ false }}" enhanced>
+  <view wx:for="{{ list }}" wx:key="index" class="sidebar-item {{ index === current ? 'active' : ''}}" bindtap="switch" data-current="{{ index }}" >
+    <image src="{{ item.icon }}" class="item-icon"/>
+    <view class="item-label">{{ item.label }}</view>
+    <view class="left-line" wx:if="{{ index === current}}"></view>
+  </view>
+</scroll-view>

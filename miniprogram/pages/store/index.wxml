@@ -1,0 +1,99 @@
+<!--pages/store/index.wxml-->
+<view class="page">
+  <view class="header">
+    <tabs tabs="{{ [{value: 'nearby', label: '附近门店'}, {value: 'recent', label: '常去门店'}] }}"></tabs>
+    <input bindtap="chooseLocation" type="text" class="search" placeholder="搜索门店" />
+  </view>
+
+  <map id="store-map" class="store-map" style="height: {{collapse ? '0rpx' : '520rpx'}};" show-location latitude="{{ latitude }}" longitude="{{ longitude }}" markers="{{ markers }}" bindmarkertap="onMarkerTab" >
+    <image src="../../assets/image/current.png" class="current-icon" bindtap="goToCurrentLocation" />
+  </map>
+
+  <view class="collapse-area" bindtap="collapse">
+    {{collapse ? '展开地图' : '收起地图'}}
+    <image src="{{ '../../assets/icon/arrow-' + (collapse ? 'down' : 'up') + '.svg' }}" class="icon"/>
+  </view>
+  <!-- 店铺展示 -->
+  <scroll-view class="store-list" scroll-y>
+    <!-- <view class="store-box">
+      <view class="info-area">
+        <view class="name">蜜雪冰城（范家新村店）</view>
+        <view class="address">广兰大道418号</view>
+        <view class="time">营业时间：09:00 ~ 21:00</view>
+        <view class="tag">营业中</view>
+      </view>
+      
+      <view class="location-area">
+        <view class="distance">距离1.3km</view>
+        <view class="action-area">
+         <image src="../../assets/image/location.jpg" class="location" />
+         <image src="../../assets/image/phone.jpg" class="phone" mode=""/>
+        </view>
+      </view>
+    </view> 
+
+    <view class="store-box">
+      <view class="info-area">
+        <view class="name">蜜雪冰城（东华理工店）</view>
+        <view class="address">广兰大道418号</view>
+        <view class="time">营业时间：09:00 ~ 21:00</view>
+        <view class="tag">营业中</view>
+      </view>
+      <view class="location-area">
+        <view class="distance">距离1.3km</view>
+        <view class="action-area">
+         <image src="../../assets/image/location.jpg" class="location" />
+         <image src="../../assets/image/phone.jpg" class="phone"/>
+        </view>
+      </view> 
+    </view> -->
+
+    <view wx:for="{{ storeList }}" style="height: calc(100vh - {{ collapse ? 180 : 700}} rpx);" wx:key="index" class="store-box"  >
+      <view class="info-area" bindtap="popupStoreDetail" data-store="{{ item }}">
+        <view class="name">{{ item.name }}</view>
+        <view class="address">{{ item.address }}</view>
+        <view class="time">营业时间：{{ item.opening_time }}</view>
+        <view class="tag">{{ dict[item.status] }}</view>
+      </view>
+
+      <view class="location-area">
+        <view class="distance">距离{{ item.distance }}km</view>
+        <view class="action-area">
+          <image src="../../assets/image/location.jpg" bindtap="navigateLocation" data-location="{{ item.location }}" class="location" />
+          <image src="../../assets/image/phone.jpg" bindtap="call" data-phone="{{ item.phone }}" class="phone" />
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{ storeList.length === 0}}">抱歉附近没有店</view>
+  </scroll-view>
+
+  <page-container wx:if="{{ currentStore }}" show="{{ storeDetailShow }}" round position="bottom" class="store-detail"> 
+
+    <view class="notification">
+      <image src="../../assets/icon/speaker.svg" class="icon" />
+      <view class="info">我们的门店很多，千万不要选错哦</view>
+    </view>
+
+    <view class="container">
+      <view class="header-area">
+        <view class="info">
+          <view class="title">{{ currentStore.name }}</view>
+          <view class="address">{{ currentStore.address }}</view>
+        </view>
+
+        <view class="distance">
+          距离<view style="color: red;">{{ currentStore.distance }}km</view>
+        </view>
+      </view>
+
+      <map id="store--detail-map" class="store-detail-map" show-location="true" latitude="{{ currentStore.location.latitude }}" longitude="{{ currentStore.location.longitude }}" markers="{{ markers }}">
+      </map>
+
+      <button class="menu-btn" bindtap="goToMenu" data-store-id="{{ currentStore._id }}">进入菜单</button>
+      
+    </view>
+
+
+  </page-container>
+
+</view>

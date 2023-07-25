@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/store/index",
+    "pages/me/index",
+    "pages/menu/index",
+    "pages/order/index",
+    "pages/product/detail",
+    "pages/web-view/index",
+    "pages/login/index",
+    "pages/custom-page/index"
+  ],
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于给您匹配最佳门店"
+    } 
+  },
+  "plugins": {
+    "chooseLocation": {
+    "version": "1.0.10",
+    "provider": "wx76a9a06e5b4e693e"
+    }
+  },
+  "window": {
+    "backgroundColor": "#fefefe",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "冰雪王国",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#797979",
+    "selectedColor": "#E60012",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "assets/image/home.png",
+      "selectedIconPath": "assets/image/home-selected.png"
+    },{
+      "pagePath": "pages/store/index",
+      "text": "点餐", 
+      "iconPath": "assets/image/menu.png",
+      "selectedIconPath": "assets/image/menu-selected.png"
+    },{
+      "pagePath": "pages/order/index",
+      "text": "订单",
+      "iconPath": "assets/image/order.png",
+      "selectedIconPath": "assets/image/order-selected.png"
+    },{
+      "pagePath": "pages/me/index",
+      "text": "我的",
+      "iconPath": "assets/image/me.png",
+      "selectedIconPath": "assets/image/me-selected.png"
+    }
+  ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
